@@ -4,39 +4,52 @@ import java.util.Random;
 
 public class Puzzle {
     private Piece[][] contents;
-    private int coreSideSize;
-    private int activePieces;
-    private int sideSize;
+    private int size;
     private int colorWheelSize;
     private Random myRandom;
     Puzzle(int coreSize, int activePieces, int colorWheelSize) {
-        thissmyRandom = newRandom();
-        this.coreSideSize = coreSize;
-        this.activePieces = activePieces;
+        this.myRandom = new Random();
+        this.size = coreSize;
         this.colorWheelSize = colorWheelSize;
-        this.sideSize = this.coreSideSize;
-        if (this.activePieces > coreSideSize*coreSideSize) {
-            sideSize +=1;
-        }
-        this.contents = new Piece[sideSize][sideSize];
+        this.contents = new Piece[this.size][this.size];
     }
+
     public void initiate(){
         //select a random integer one though colorWheelSize
         int randomInt = this.myRandom.nextInt(colorWheelSize);
         randomInt ++;
-        //populate contents with that number except outer ring
-        for (int i = 0; i<coreSize; i++){
-            for (int j =0; j<coreSize; j++) {
-                this.contents[i+1][j+1].setColorVal(randomInt);
+        //populate contents with that number
+        for (int i = 0; i < this.size; i++) {
+            for (int j = 0; j < this.size; j++) {
+                this.contents[i][j].setColorVal(randomInt);
             }
         }
-
-        //populate contents with that number except outer ring
     }
+
+    //randomly stimulate the puzzle
+    public void randomize(){
+        int randomXCord = myRandom.nextInt(this.size);
+        int randomYCord = myRandom.nextInt(this.size);
+        this.contents[randomXCord][randomYCord].colorSwitch(this.colorWheelSize);
+        if (randomXCord + 1 < this.size) {
+            this.contents[randomXCord+1][randomYCord].colorSwitch(this.colorWheelSize);
+        }
+        if (randomXCord - 1 > 0) {
+            this.contents[randomXCord-1][randomYCord].colorSwitch(this.colorWheelSize);
+        }
+        if (randomYCord + 1 < this.size) {
+            this.contents[randomXCord][randomYCord+1].colorSwitch(this.colorWheelSize);
+        }
+        if (randomYCord - 1 > 0) {
+            this.contents[randomXCord][randomYCord-1].colorSwitch(this.colorWheelSize);
+        }
+    }
+
+    //print out the contents of the puzzle
     public void print(){
         System.out.println("--Printing Puzzle--");
-        for (int i = 0; i<sideSize; i++){
-            for (int j =0; j<sideSize; j++) {
+        for (int i = 0; i<this.size; i++){
+            for (int j =0; j<this.size; j++) {
                 contents[i][j].print();
             }
             System.out.println();
