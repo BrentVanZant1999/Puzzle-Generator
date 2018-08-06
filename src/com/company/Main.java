@@ -72,7 +72,6 @@ public class Main {
             else {
                 currentPuzzle.arrayPrint();
             }
-            }
         }
     }
 

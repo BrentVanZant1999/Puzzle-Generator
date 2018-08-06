@@ -21,6 +21,7 @@ public class Puzzle {
         //select a random integer one though colorWheelSize
         int randomInt = this.myRandom.nextInt(colorWheelSize);
         randomInt ++;
+        System.out.println("BG :" +randomInt);
         //populate contents with that number
         for (int i = 0; i < this.size; i++) {
             for (int j = 0; j < this.size; j++) {
@@ -61,5 +62,20 @@ public class Puzzle {
             }
             System.out.println();
         }
+    }
+
+    //print out the contents of the puzzle in grid form
+    public void arrayPrint(){
+        System.out.println("--Printing Puzzle--");
+        System.out.print("[");
+        for (int i = 0; i<this.size; i++){
+            for (int j =0; j<this.size; j++) {
+                contents[i][j].print();
+                if ( j!= this.size-1 || i!=this.size-1) {
+                    System.out.print(",");
+                }
+            }
+        }
+        System.out.print("]");
     }
 }
