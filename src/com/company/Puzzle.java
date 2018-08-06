@@ -52,7 +52,7 @@ public class Puzzle {
         }
     }
 
-    //print out the contents of the puzzle
+    //print out the contents of the puzzle in grid form
     public void print(){
         System.out.println("--Printing Puzzle--");
         for (int i = 0; i<this.size; i++){
